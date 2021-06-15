@@ -1,12 +1,15 @@
 <template>
   <div>
     <div class="unify-title">
-    {{title}}
+      {{ title }}
     </div>
     <div class="codemirror">
       <div class="codemirror-box">
         <div class="code-pre">
-          <el-button type="primary" @click="executeCode">执行代码</el-button> （打开浏览器开发者工具查看执行结果）
+          <template v-if="isExecute">
+            <el-button type="primary" @click="executeCode">执行代码</el-button>
+            （打开浏览器开发者工具查看执行结果）
+          </template>
           <codemirror v-model="innerCode" :options="cmOptions"></codemirror>
         </div>
       </div>
@@ -28,7 +31,8 @@ export default {
     code: {
       type: String,
       default: 'const a = 0'
-    }
+    },
+    isExecute: true
   },
   data () {
     return {
@@ -69,7 +73,7 @@ export default {
   font-weight: bold;
   font-size: 24px;
   margin-bottom: 24px;
-  padding-top:10px;
+  padding-top: 10px;
 }
 
 .codemirror-box {

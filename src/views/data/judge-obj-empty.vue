@@ -8,7 +8,7 @@ export default {
   data () {
     return {
       code: `
-      // 这题主要是对对象数据的理解，尤其当对象数据的属性不可遍历时候有些方法是失效的
+    // 这题主要是对对象数据的理解，尤其当对象数据的属性不可遍历时候有些方法是失效的
     // 1，比如这种定义下
     const obj1 = {}
     function judgeObjIsEmpty1 (obj) {
