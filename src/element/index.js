@@ -3,4 +3,4 @@ import ElementUI from 'element-ui'
 
 import './element-variables.scss'
 
-Vue.use(ElementUI, { size: 'small', zIndex: 3000 })
+Vue.use(ElementUI, { size: 'mini', zIndex: 3000 })
