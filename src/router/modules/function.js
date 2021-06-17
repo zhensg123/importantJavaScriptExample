@@ -18,6 +18,10 @@ export default [{
   path: '/function/closure',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/closure.vue')
+},{
+  path: '/function/instanceof',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/instanceof.vue')
 }]
 
-// self-new  create-js  closure
+// self-new  create-js  closure  instanceof

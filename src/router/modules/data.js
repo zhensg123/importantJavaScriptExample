@@ -18,4 +18,10 @@ export default [{
   path: '/data/object-prevent-extension',
   name: 'data',
   component: () => import(/* webpackChunkName: "data" */ '@/views/data/object-prevent-extension.vue')
+},{
+  path: '/data/create-obj',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/create-obj.vue')
 }]
+
+// create-obj
