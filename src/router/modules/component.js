@@ -10,6 +10,11 @@ export default [{
   path: '/component/lazy-load',
   name: 'component',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/lazy-load.vue')
+}, {
+// lazy-load
+  path: '/component/carousel',
+  name: 'component',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/carousel.vue')
 }]
 
-// lazy-load
+// carousel
