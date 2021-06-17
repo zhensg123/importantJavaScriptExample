@@ -32,7 +32,10 @@ export default {
       type: String,
       default: 'const a = 0'
     },
-    isExecute: true
+    isExecute: {
+      type: Boolean,
+      default: true
+    }
   },
   data () {
     return {
