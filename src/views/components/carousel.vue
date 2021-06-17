@@ -43,7 +43,6 @@ export default {
 }
 .parent {
   position: absolute;
-  display: flex;
   > div {
     display: inline-block;
     width: 100px;
