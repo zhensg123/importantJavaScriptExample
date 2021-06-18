@@ -10,7 +10,7 @@ export default [{
   path: '/function/deep-clone',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/deep-clone.vue')
-},{
+}, {
   path: '/function/self-map',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/self-map.vue')
@@ -42,6 +42,18 @@ export default [{
   path: '/function/promise-chunk',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/promise-chunk.vue')
+}, {
+  path: '/function/function-type',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-type.vue')
+}, {
+  path: '/function/for-in-break',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/for-in-break.vue')
+}, {
+  path: '/function/function-currying',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-currying')
 }]
 
-// self-new  create-js  closure  instanceof  promise-chunk
+// self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying
