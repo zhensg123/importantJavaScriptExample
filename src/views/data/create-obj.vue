@@ -8,26 +8,29 @@ export default {
   data () {
     return {
       code: `
-      function judgeDataIsNaN (data) {
-      if (Object.prototype.toString.call(data) === '[object Number]') {
-        // eslint-disable-next-line no-self-compare
-        return data !== data
-      }
-      return false
-    }
+       const obj1 = new Object()
+    const obj2 = {}
 
-    console.log(judgeDataIsNaN(NaN), judgeDataIsNaN(1), '1')`,
+    const obj3 = Object.create(null)
+    function CreateObjType (name) {
+      this.name = name
+    }
+    const obj4 = new CreateObjType('nan')
+    console.log(obj1, obj2, obj3, obj4, 'ddd')
+       `,
       title: '创建对象数据的几种方式'
     }
   },
   mounted () {
-    function judgeDataIsNaN (data) {
-      if (Object.prototype.toString.call(data) === '[object Number]') {
-        // eslint-disable-next-line no-self-compare
-        return data !== data
-      }
-      return false
+    const obj1 = new Object()
+    const obj2 = {}
+
+    const obj3 = Object.create(null)
+    function CreateObjType (name) {
+      this.name = name
     }
+    const obj4 = new CreateObjType('nan')
+    console.log(obj1, obj2, obj3, obj4, 'ddd')
   }
 }
 </script>

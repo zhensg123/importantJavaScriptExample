@@ -1,6 +1,9 @@
 <template>
   <div id="app">
     <div class="left-nav">
+      <div class="titile">
+        <h4>常见开发场景</h4>
+      </div>
        <el-menu
         router
         :collapse-transition="false"
@@ -75,6 +78,20 @@ export default {
 .content {
   margin-left: 168px;
   height: 100%;
+}
+.titile {
+      background-color:rgb(84, 92, 100);
+             box-sizing: border-box;
+        width:167px;
+      h4 {
+        margin: 0;
+        color: #fff;
+        height: 48px;
+        line-height: 48px;
+        padding-left: 10px;
+        font-size: 18px;
+ 
+      }
 }
 #nav {
   padding: 30px;

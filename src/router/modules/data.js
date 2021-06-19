@@ -26,6 +26,10 @@ export default [{
   path: '/data/judge-data-isfinite',
   name: 'data',
   component: () => import(/* webpackChunkName: "data" */ '@/views/data/judge-data-isfinite.vue')
+}, {
+  path: '/data/obj-inherit',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/obj-inherit.vue')
 }]
 
-// create-obj  judge-data-isfinite
+// create-obj  judge-data-isfinite  obj-inherit

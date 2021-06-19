@@ -31,7 +31,7 @@ export default [{
   path: '/function/jsonp',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/jsonp.vue')
-},{
+}, {
   path: '/function/time-chunk',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/time-chunk.vue')
@@ -55,6 +55,10 @@ export default [{
   path: '/function/function-currying',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-currying')
+}, {
+  path: '/function/self-setinterval',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/self-setinterval')
 }]
 
-// self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying
+// self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval
