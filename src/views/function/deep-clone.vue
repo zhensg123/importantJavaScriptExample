@@ -19,8 +19,8 @@ export default {
     }
   },
   mounted () {
-      // 这种深拷贝的写法有bug
-      // 不应用于正则表达式、null的继承
+    // 这种深拷贝的写法有bug
+    // 不应用于正则表达式、null的继承
     function deepClone (obj) {
       const init = Array.isArray(obj) ? [] : {}
       for (const key in obj) {
@@ -32,7 +32,7 @@ export default {
       }
       return init
     }
-    console.log(deepClone({ a: 1,dd: null, reg: /\d/ ,function:()=>{}, b: { a: 1 } }))
+    console.log(deepClone({ a: 1, dd: null, reg: /\d/, function: () => {}, b: { a: 1 } }))
   }
 }
 </script>

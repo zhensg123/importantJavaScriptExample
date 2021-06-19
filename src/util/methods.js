@@ -1,16 +1,16 @@
 export const jsonp = function (url, data) {
   return new Promise((resolve, reject) => {
     // 初始化url
-    let dataString = url.indexOf('?') === -1 ? '?' : ''
-    let callbackName = `jsonpCB_${Date.now()}`
+    const dataString = url.indexOf('?') === -1 ? '?' : ''
+    const callbackName = `jsonpCB_${Date.now()}`
     url += `${dataString}callback=${callbackName}`
     if (data) {
       // 有请求参数，依次添加到url
-      for (let k in data) {
-        url += `${k}=${data[k]}`
+      for (const k in data) {
+        url += `&${k}=${data[k]}`
       }
     }
-    let jsNode = document.createElement('script')
+    const jsNode = document.createElement('script')
     jsNode.src = url
     // 触发callback，触发后删除js标签和绑定在window上的callback
     window[callbackName] = result => {
@@ -33,7 +33,7 @@ export const jsonp = function (url, data) {
   })
 }
 
-export const  thousandNum = function (num) {
-  //有小数点  //无小数点
+export const thousandNum = function (num) {
+  // 有小数点  //无小数点
   String(num).indexOf('.') > -1 ? num.replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : num.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
 }
