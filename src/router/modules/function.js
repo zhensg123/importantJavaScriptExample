@@ -2,6 +2,7 @@ export default [{
   path: '/function/pure-function',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/pure-function.vue')
+
 }, {
   path: '/function/deep-clone',
   name: 'function',
@@ -30,6 +31,30 @@ export default [{
   path: '/function/jsonp',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/jsonp.vue')
+},{
+  path: '/function/time-chunk',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/time-chunk.vue')
+}, {
+  path: '/function/all-settled',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/all-settled.vue')
+}, {
+  path: '/function/promise-chunk',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/promise-chunk.vue')
+}, {
+  path: '/function/function-type',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-type.vue')
+}, {
+  path: '/function/for-in-break',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/for-in-break.vue')
+}, {
+  path: '/function/function-currying',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-currying')
 }]
 
-// self-new  create-js  closure  instanceof jsonp
+// self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying
