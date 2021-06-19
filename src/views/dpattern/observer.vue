@@ -1,6 +1,6 @@
 <template>
   <div>
-    <showCode :title="title" :code.sync='code'></showCode>
+    <showCode :title="title" :code.sync="code"></showCode>
   </div>
 </template>
 <script>
@@ -8,26 +8,99 @@ export default {
   data () {
     return {
       code: `
-      function judgeDataIsNaN (data) {
-      if (Object.prototype.toString.call(data) === '[object Number]') {
-        // eslint-disable-next-line no-self-compare
-        return data !== data
+      function Subject(){
+  this.observers = [];
+}
+ 
+Subject.prototype = {
+  add:function(observer){  // 添加
+    this.observers.push(observer);
+  },
+  remove:function(observer){  // 删除
+    var observers = this.observers;
+    for(var i = 0;i < observers.length;i++){
+      if(observers[i] === observer){
+        observers.splice(i,1);
       }
-      return false
     }
-
-    console.log(judgeDataIsNaN(NaN), judgeDataIsNaN(1), '1')`,
-      title: '创建对象数据的几种方式'
+  },
+  notify:function(){  // 通知
+    var observers = this.observers;
+    for(var i = 0;i < observers.length;i++){
+      observers[i].update();
+    }
+  }
+}
+ 
+function Observer(name){
+  this.name = name;
+}
+ 
+Observer.prototype = {
+  update:function(){  // 更新
+    console.log('my name is '+this.name);
+  }
+}
+ 
+var sub = new Subject();
+ 
+var obs1 = new Observer('ttsy1');
+var obs2 = new Observer('ttsy2');
+ 
+sub.add(obs1);
+sub.add(obs2);
+sub.notify();  //my name is ttsy1、my name is ttsy2`,
+      title: '观察者模式'
     }
   },
   mounted () {
     // 单利模式本身是一个闭包
-    function singlePattern (fn) {
-      const result = null
-      return function () {
-        return result || fn.apply(this, arguments)
+    function Subject () {
+      this.observers = []
+    }
+
+    Subject.prototype = {
+      add: function (observer) {
+        // 添加
+        this.observers.push(observer)
+      },
+      remove: function (observer) {
+        // 删除
+        var observers = this.observers
+        for (var i = 0; i < observers.length; i++) {
+          if (observers[i] === observer) {
+            observers.splice(i, 1)
+          }
+        }
+      },
+      notify: function () {
+        // 通知
+        var observers = this.observers
+        for (var i = 0; i < observers.length; i++) {
+          observers[i].update()
+        }
       }
     }
+
+    function Observer (name) {
+      this.name = name
+    }
+
+    Observer.prototype = {
+      update: function () {
+        // 更新
+        console.log('my name is ' + this.name)
+      }
+    }
+
+    var sub = new Subject()
+
+    var obs1 = new Observer('ttsy1')
+    var obs2 = new Observer('ttsy2')
+
+    sub.add(obs1)
+    sub.add(obs2)
+    sub.notify() // my name is ttsy1、my name is ttsy2
   }
 }
 </script>
