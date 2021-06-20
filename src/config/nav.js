@@ -29,6 +29,10 @@ const menus = {
     name: '设计模式',
     icon: 'icon-iconset0357'
   },
+  css: {
+    name: 'css',
+    icon: 'icon-liulanqi'
+  },
   browser: {
     name: '浏览器',
     icon: 'icon-liulanqi'
