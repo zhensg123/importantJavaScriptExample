@@ -28,6 +28,12 @@ export default [{
   title: '获取滚动条滚动高度？',
   icon: '',
   component: () => import(/* webpackChunkName: "browser" */ '@/views/browser/browser-scroll.vue')
+}, {
+  path: '/browser/dom-handler',
+  name: 'browser',
+  title: '操作dom',
+  icon: '',
+  component: () => import(/* webpackChunkName: "browser" */ '@/views/browser/dom-handler.vue')
 }]
 
-// create-obj  judge-data-isfinite  obj-inherit  dom-empty  browser-location browser-bom
+// create-obj  judge-data-isfinite  obj-inherit  dom-empty  browser-location browser-bom  dom-handler
