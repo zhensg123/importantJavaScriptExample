@@ -34,6 +34,12 @@ export default [{
   title: '操作dom',
   icon: '',
   component: () => import(/* webpackChunkName: "browser" */ '@/views/browser/dom-handler.vue')
+}, {
+  path: '/browser/dom-style-handler',
+  name: 'browser',
+  title: '操作dom样式',
+  icon: '',
+  component: () => import(/* webpackChunkName: "browser" */ '@/views/browser/dom-style-handler.vue')
 }]
 
-// create-obj  judge-data-isfinite  obj-inherit  dom-empty  browser-location browser-bom  dom-handler
+// create-obj  judge-data-isfinite  obj-inherit  dom-empty  browser-location browser-bom  dom-handler dom-style-handler
