@@ -6,6 +6,8 @@ import plugin from './plugin'
 import '@/components'
 
 import '@/assets/styles/reset.css'
+import '@/assets/icon/iconfont.css'
+
 import '@/element'
 
 import * as filters from './filters' // global filters

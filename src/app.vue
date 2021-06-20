@@ -20,7 +20,7 @@
           v-for="(item, index) in menuList"
         >
           <template slot="title">
-            <span>{{ item.menu }}</span>
+            <i :class="[item.icon, 'iconfont']"></i><span>{{ item.menu }}</span>
           </template>
           <template v-for="(subMenu, subIndex) in item.children">
             <el-menu-item
@@ -28,7 +28,7 @@
               :key="index + '' + subIndex"
               :index="subMenu.path"
             >
-              <span>{{ subMenu.menu }}</span>
+              <span>{{ subMenu.title }}</span>
             </el-menu-item>
           </template>
         </el-submenu>
