@@ -10,6 +10,10 @@ export default [{
   path: '/dpattern/publish-subscribe',
   name: 'dpattern',
   component: () => import(/* webpackChunkName: "dpattern" */ '@/views/dpattern/publish-subscribe.vue')
+},{
+  path: '/dpattern/object-oriented',
+  name: 'dpattern',
+  component: () => import(/* webpackChunkName: "dpattern" */ '@/views/dpattern/object-oriented.vue')
 }]
 
-// carousel
+// carousel  object-oriented

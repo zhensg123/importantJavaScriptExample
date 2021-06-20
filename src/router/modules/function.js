@@ -59,6 +59,14 @@ export default [{
   path: '/function/self-setinterval',
   name: 'function',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/self-setinterval')
+}, {
+  path: '/function/self-jsonstringify',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/self-jsonstringify')
+}, {
+  path: '/function/promise-cache',
+  name: 'function',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/promise-cache')
 }]
 
-// self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval
+// self-jsonstringify self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval

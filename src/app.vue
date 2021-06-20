@@ -73,6 +73,7 @@ export default {
    z-index: 10;
    > ul {
      height: 100%;
+     overflow: auto;
    }
 }
 .content {
@@ -90,7 +91,6 @@ export default {
         line-height: 48px;
         padding-left: 10px;
         font-size: 18px;
- 
       }
 }
 #nav {

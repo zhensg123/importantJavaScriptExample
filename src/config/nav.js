@@ -29,7 +29,19 @@ export default [{
     menu: '创建对象的方式',
     path: '/data/create-obj',
     children: []
-  }]
+  }, {
+    menu: '将数值转为逗号分隔',
+    path: '/data/to-thousands',
+    children: []
+  }, {
+    menu: '遍历对象和数组',
+    path: '/data/ergodic-arr-obj',
+    children: []
+  }, {
+    menu: 'BOM的核心是什么',
+    path: '/data/bom-center',
+    children: []
+  }] 
 }, {
   menu: '函数',
   icon: 'icon-marketindex',
@@ -85,6 +97,10 @@ export default [{
     menu: 'promise的all-settled',
     path: '/function/all-settled',
     children: []
+  }, {
+    menu: '自定义jsonString',
+    path: '/function/self-jsonstringify',
+    children: []
   }]
 }, {
   menu: '组件',
@@ -119,15 +135,19 @@ export default [{
   icon: 'icon-marketindex',
   children: [{
     menu: '单例模式',
-    path: '/browser/browser-type',
+    path: '/dpattern/single',
     children: []
   },{
     menu: '观察者模式',
-    path: '/browser/observer',
+    path: '/dpattern/observer',
     children: []
   },{
     menu: '发布订阅模式',
-    path: '/browser/publish-subscribe',
+    path: '/dpattern/publish-subscribe',
+    children: []
+  },{
+    menu: '面向对象和面向过程编程',
+    path: '/dpattern/object-oriented',
     children: []
   }]
 }]

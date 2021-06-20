@@ -30,6 +30,26 @@ export default [{
   path: '/data/obj-inherit',
   name: 'data',
   component: () => import(/* webpackChunkName: "data" */ '@/views/data/obj-inherit.vue')
+}, {
+  path: '/data/to-thousands',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/to-thousands.vue')
+}, {
+  path: '/data/ergodic-arr-obj',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/ergodic-arr-obj.vue')
+}, {
+  path: '/data/bom-center',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/bom-center.vue')
+},{
+  path: '/data/data-to-string',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/data-to-string.vue')
+},{
+  path: '/data/data-multi',
+  name: 'data',
+  component: () => import(/* webpackChunkName: "data" */ '@/views/data/data-multi.vue')
 }]
 
-// create-obj  judge-data-isfinite  obj-inherit
+// create-obj  judge-data-isfinite  obj-inherit  to-thousands  ergodic-arr-obj  data-to-string  data-multi
