@@ -74,6 +74,7 @@ export default {
    > ul {
      height: 100%;
      overflow: auto;
+     padding-bottom: 200px;
    }
 }
 .content {

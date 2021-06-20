@@ -40,6 +40,12 @@ export default [{
   title: '操作dom样式',
   icon: '',
   component: () => import(/* webpackChunkName: "browser" */ '@/views/browser/dom-style-handler.vue')
+}, {
+  path: '/browser/broswer-dynamic-style',
+  name: 'browser',
+  title: '动态创建样式',
+  icon: '',
+  component: () => import(/* webpackChunkName: "browser" */ '@/views/browser/broswer-dynamic-style.vue')
 }]
 
-// create-obj  judge-data-isfinite  obj-inherit  dom-empty  browser-location browser-bom  dom-handler dom-style-handler
+// broswer-dynamic-style create-obj  judge-data-isfinite  obj-inherit  dom-empty  browser-location browser-bom  dom-handler dom-style-handler
