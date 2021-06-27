@@ -29,6 +29,18 @@ export default [{
   title: 'table组件',
   icon: '',
   component: tableWarp
+}, {
+  path: '/component/scope-slot',
+  name: 'component',
+  title: '作用域插槽',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/scope-slot.vue')
+}, {
+  path: '/component/hoc',
+  name: 'component',
+  title: '高阶组件',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/hoc.vue')
 }]
 
-// carousel table-warp
+// carousel table-warp  hoc

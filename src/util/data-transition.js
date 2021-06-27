@@ -107,5 +107,6 @@ export const getObjValue = (obj, prop) => {
     if (obj) obj = obj[keys[i]]
     else return undefined
   }
+  console.log(obj, prop, 'ddd')
   return obj
 }
