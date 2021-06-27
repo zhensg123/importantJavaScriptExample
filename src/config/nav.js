@@ -36,6 +36,10 @@ const menus = {
   browser: {
     name: '浏览器',
     icon: 'icon-liulanqi'
+  },
+  tool: {
+    name: '工具',
+    icon: 'icon-liulanqi'
   }
 }
 const menuArr = Object.keys(menus).map((menu) => {

@@ -1,3 +1,4 @@
+import  tableWarp from '@/views/components/table-warp.vue'
 export default [{
   path: '/component/drag-component',
   name: 'component',
@@ -17,12 +18,17 @@ export default [{
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/lazy-load.vue')
 }, {
-// lazy-load
   path: '/component/carousel',
   name: 'component',
   title: '无缝轮播',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/carousel.vue')
+}, {
+  path: '/component/table-warp',
+  name: 'component',
+  title: 'table组件',
+  icon: '',
+  component: tableWarp
 }]
 
-// carousel
+// carousel table-warp

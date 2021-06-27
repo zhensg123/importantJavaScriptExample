@@ -100,6 +100,12 @@ export default [{
   title: 'promise的缓存',
   icon: '',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/promise-cache')
+}, {
+  path: '/function/obj-map',
+  name: 'function',
+  title: '对象的遍历',
+  icon: '',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/obj-map')
 }]
 
 // self-jsonstringify self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval

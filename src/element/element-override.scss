@@ -1,0 +1,138 @@
+
+  /* 容器：新页面用 */
+ .table-wrap {
+    &.wrap-view {
+      margin-bottom: 10px;
+      background-color: #fff;
+      border: 1px solid #dddde2;
+    }
+  }
+  
+  .table-wrap.wrap-view {
+    padding: 10px;
+  }
+  
+
+  
+  .table-wrap {
+    &__header {
+      padding: 1px 0 10px;
+  
+      .query-item {
+        padding: 0 0 0 20px;
+      }
+    }
+  
+    &__footer {
+      padding: 10px 0 1px;
+      text-align: right;
+    }
+  
+    .el-pagination {
+      padding: 0 20px;
+    }
+  
+    .success-row {
+      background: #b7f9be;
+    }
+  
+    .info-row {
+      background: #dbdbdb;
+    }
+  
+    .warning-row {
+      background: oldlace;
+    }
+  
+    .danger-row {
+      background: #fabdc2;
+    }
+  }
+  
+  .table-wrap .el-table__expanded-cell {
+    padding: 15px 15px 20px;
+  
+    .el-form-item {
+      &__label {
+        font-weight: bold;
+      }
+    }
+  
+    .el-form-item + .el-form-item {
+      margin-top: 10px;
+    }
+  }
+  
+  .table-wrap .el-table thead, .wbox .el-table thead {
+    //color: #606266;
+    font-weight: 600;
+    //tr {}
+    th {
+      padding: 3px 0;
+      border-right: 1px solid #dddde2;
+      border-bottom: 1px solid #dddde2;
+      background-color: #f3f3fd;
+    }
+  }
+  
+  .table-wrap.simple .el-table thead {
+    th {
+      padding: 0;
+    }
+  }
+
+
+  .box-header {
+    width: 100%;
+    display: table;
+    white-space: nowrap;
+  
+    &__left {
+      width: 50%;
+      display: table-cell;
+      text-align: left;
+      vertical-align: middle;
+    }
+  
+    &__center {
+      display: table-cell;
+      text-align: center;
+      vertical-align: middle;
+    }
+  
+    &__right {
+      width: 50%;
+      display: table-cell;
+      text-align: right;
+      vertical-align: middle;
+    }
+  
+    &__left, &__center, &__right {
+      & > * {
+        vertical-align: middle;
+      }
+    }
+  
+    .el-button.el-button--text {
+      padding: 0;
+      line-height: 9px;
+  
+      span {
+        font-size: 11px;
+      }
+    }
+  }
+  
+  .box-content {
+    padding: 10px;
+    overflow-y: auto;
+    .el-divider__text {
+      font-size: 14px;
+      font-weight: bold;
+      color: #616161;
+    }
+  
+    .el-form-item__label {
+      font-size: 13px;
+    }
+  }
