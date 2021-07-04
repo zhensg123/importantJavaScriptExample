@@ -41,6 +41,18 @@ export default [{
   title: '高阶组件',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/hoc.vue')
+}, {
+  path: '/component/render1',
+  name: 'component',
+  title: 'render练习1',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/render1.vue')
+}, {
+  path: '/component/function-component',
+  name: 'component',
+  title: '函数式组件应用',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/function-component.vue')
 }]
 
-// carousel table-warp  hoc
+// carousel table-warp  hoc render1 function-component

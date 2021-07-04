@@ -40,6 +40,10 @@ const menus = {
   tool: {
     name: '工具',
     icon: 'icon-liulanqi'
+  },
+  vuek: {
+    name: 'vue知识点',
+    icon: 'icon-liulanqi'
   }
 }
 const menuArr = Object.keys(menus).map((menu) => {
