@@ -17,6 +17,9 @@ import VueCodemirror from 'vue-codemirror'
 
 // require styles
 import 'codemirror/lib/codemirror.css'
+// import xoneui from 'xoneui'
+// console.log(xoneui, 'xoneui')
+// Vue.use(xoneui)
 
 // require more codemirror resource...
 

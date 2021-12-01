@@ -120,8 +120,10 @@ export default {
       table: this
     }
   },
-  mounted () {
-    this.initColumns()
+  created () {
+    this.$nextTick(()=>{
+      this.initColumns()
+    })
   },
   computed: {
     table () {
