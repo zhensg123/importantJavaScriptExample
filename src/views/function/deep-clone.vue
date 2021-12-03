@@ -36,6 +36,7 @@ export default {
     }
   },
   mounted () {
+    
     // 这种深拷贝的写法有bug的
     const deep = function (obj) {
       // 判断拷贝的要进行深拷贝的是数组还是对象，是数组的话进行数组拷贝，对象的话进行对象拷贝
