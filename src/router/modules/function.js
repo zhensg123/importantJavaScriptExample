@@ -79,7 +79,7 @@ export default [{
 }, {
   path: '/function/function-currying',
   name: 'function',
-  title: '函数的纯函数',
+  title: '函数柯里化',
   icon: '',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-currying')
 }, {
