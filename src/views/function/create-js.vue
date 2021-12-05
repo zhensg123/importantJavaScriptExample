@@ -19,6 +19,9 @@ export default {
     }
   },
   mounted () {
+    import('./add.js').then((res)=>{
+      console.log(res.default(2, 4), 'res')
+    })
     function createjs () {
       const script = document.createElement('script')
       script.src = '/test.js'

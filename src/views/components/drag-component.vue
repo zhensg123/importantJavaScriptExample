@@ -99,7 +99,11 @@ export default {
             this.mouseDownY = e.pageY
 
             // 初始位置的X，Y 坐标
+            // 通过上面的三个例子不难看出，
+            // offsetLeft值跟offsetTop值的获取跟父级元素没关系，而是跟其上一级的定位元素
+            // (除position:static;外的所有定位如fixed,relative,absolute)有关系。
             const { offsetLeft, offsetTop } = this.obj
+            console.log(offsetLeft, offsetTop, 'offsetTop')
             this.initX = offsetLeft
             this.initY = offsetTop
 

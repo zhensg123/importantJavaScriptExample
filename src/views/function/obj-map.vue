@@ -90,77 +90,23 @@ export default {
       }
       return BFSARR
     }
-    console.log(BFS(obj))
+    console.log(BFS(obj), '广度优先遍历')
 
-    const arr = [
-      {
-        name: 'test',
-        path: 'test',
-        children: [
-          {
-            name: 'inner',
-            path: 'inner',
-            children: [
-              {
-                name: 'three',
-                path: 'three',
-                children: [
-                  {
-                    name: 'four',
-                    path: 'four'
-                  }
-                ]
-              }
-            ]
-          },
-          {
-            name: 'inner1',
-            path: 'inner1',
-            children: [
-              {
-                name: 'three1',
-                path: 'three1',
-                children: []
-              }
-            ]
-          }
-        ]
-      }
-    ]
+    
     const DFSARR = []
-    let isStop = false
     // Depth First Search
-    function DFS (obj, path) {
-      const temp = {}
-      const arrs = Object.entries(obj)
-      for (let i = 0; i < arrs.length; i++) {
-        const [k, v] = arrs[i]
-        temp[k] = v
-        if (Array.isArray(v)) {
-          DFSARR.push(temp)
-          v.forEach((menu) => {
-            DFS(menu, path)
-          })
-		  if(isStop){
-			  break
-		  }
+    function DFS (obj) {
+      if (obj === null || typeof obj !== 'object') return
+      console.log( Object.entries(obj), '111111111')
+      Object.entries(obj).map(([k, v], index) => {
+        DFSARR.push(k)
+        if (typeof v === 'object') {
+          DFS(v)
         }
-        if (v === path) {
-          isStop = true
-        }
-      }
-      return DFSARR
-    }
-    function findPath (path) {
-      arr.forEach((menu) => {
-        menu.children.forEach((menu) => {
-           !isStop && DFS(menu, path)
-        })
       })
       return DFSARR
     }
-
-    console.log(findPath('three'), '222222')
+    console.log(DFS(obj), 'newObj')
   }
 }
 </script>
