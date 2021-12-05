@@ -45,7 +45,6 @@ export default {
 		let DFSARR = []
 		// Depth First Search
 		function DFS(obj) {
-			newObj = obj
 			if (obj === null || typeof obj !== "object") return;
 			Object.entries(obj).map(([k, v], index) => {
 				DFSARR.push(k);
@@ -97,7 +96,6 @@ export default {
     // Depth First Search
     function DFS (obj) {
       if (obj === null || typeof obj !== 'object') return
-      console.log( Object.entries(obj), '111111111')
       Object.entries(obj).map(([k, v], index) => {
         DFSARR.push(k)
         if (typeof v === 'object') {
