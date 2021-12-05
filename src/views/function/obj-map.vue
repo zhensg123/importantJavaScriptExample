@@ -1,17 +1,10 @@
 <template>
   <div>
     <showCode :title="title" :code.sync="code"></showCode>
-    <xone-select v-model="test" :list='[{xvalue: "222", xlabel: 122}]'></xone-select>
   </div>
 </template>
 <script>
-import {XoneSelect, Toast} from 'xoneui'
-console.log(Toast, 'Toast')
-console.log(XoneSelect, 'XoneSelect')
 export default {
-  components: {
-    XoneSelect
-  },
   data () {
     return {
       test: '',
@@ -67,7 +60,6 @@ export default {
     }
   },
   mounted () {
-    Toast()
     var obj = {
       a: {
         b: {
