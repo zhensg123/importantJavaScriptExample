@@ -53,6 +53,12 @@ export default [{
   title: '函数式组件应用',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/function-component.vue')
+}, {
+  path: '/component/virtual-list',
+  name: 'component',
+  title: '虚拟列表渲染',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/virtual-list.vue')
 }]
-
+// virtual-list
 // carousel table-warp  hoc render1 function-component

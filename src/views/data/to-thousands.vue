@@ -50,6 +50,9 @@ export default {
       const numstr = num.toString()
       return numstr.includes('.') ? numstr.replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : numstr.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
     }
+    function toThousands2 (numstr) {
+      return numstr.includes('.') ? numstr.replace(/(\d)(?=(\d{3})+\.)/g, '$1,') : numstr.replace(/(\d)(?=(\d{3})+$)/g, '$1,')
+    }
     console.log(toThousands1(12344.2), 3333)
   }
 }

@@ -18,6 +18,8 @@ export default {
 
     }
     SubObjTest.prototype = new ObjectTest()
+        SubObjTest.prototype.constructor = SubObjTest
+
     const testObj = new SubObjTest()
     console.log(testObj.test, '22222')
        `,
@@ -34,7 +36,11 @@ export default {
     function SubObjTest () {
 
     }
+    console.log(SubObjTest.prototype.constructor, 'SubObjTest.prototype.countructor')
     SubObjTest.prototype = new ObjectTest()
+        console.log(SubObjTest.prototype.constructor, 'SubObjTest.prototype.countructor')
+
+    SubObjTest.prototype.constructor = SubObjTest
     const testObj = new SubObjTest()
     console.log(testObj.test, '22222', this.isex)
 
