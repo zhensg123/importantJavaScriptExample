@@ -59,6 +59,12 @@ export default [{
   title: '虚拟列表渲染',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/virtual-list.vue')
+}, {
+  path: '/component/comthis',
+  name: 'component',
+  title: '组件this',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/comthis.vue')
 }]
 // virtual-list
 // carousel table-warp  hoc render1 function-component

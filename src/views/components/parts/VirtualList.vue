@@ -47,7 +47,7 @@ export default {
     }
   },
   mounted () {
-      console.log(this.$el)
+      console.log(this.$el.clientHeight, '2')
     this.screenHeight = this.$el.clientHeight
     this.start = 0
     this.end = this.start + this.visibleCount
