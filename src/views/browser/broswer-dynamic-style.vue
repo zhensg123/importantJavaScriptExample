@@ -26,6 +26,12 @@ export default {
     d.setAttribute('type', 'text/css')
     d.innerHTML = 'p { color: red }'
     document.getElementsByTagName('head')[0].appendChild(d)
+    
+    // 使用import引入js
+    import('./add').then((res)=>{
+      const {add} = res
+      console.log(add(2,111), 'rererer')
+    })
 
     // 动态创建动画animation 可以使用create-keyframe-animation
   }

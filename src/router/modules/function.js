@@ -106,6 +106,11 @@ export default [{
   title: '对象的遍历',
   icon: '',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/obj-map')
+}, {
+  path: '/function/big-number',
+  name: 'function',
+  title: '大数相加',
+  icon: '',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/big-number')
 }]
-
 // self-jsonstringify self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval

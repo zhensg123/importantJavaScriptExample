@@ -25,7 +25,7 @@ export default {
     const obj1 = new Object()
     const obj2 = {}
 
-    const obj3 = Object.create(null)
+    const obj3 = Object.create(null) // 原型链上没有任何属性
     function CreateObjType (name) {
       this.name = name
     }
