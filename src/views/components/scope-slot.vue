@@ -1,7 +1,8 @@
 <template>
   <div class="box">
-    <current-user v-slot="slotProps">
+    <current-user>
        <el-button>测试阶段</el-button> 
+       <template slot-scope="user">{{user}}</template>
     </current-user>
   </div>
 </template>
