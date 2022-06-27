@@ -112,5 +112,11 @@ export default [{
   title: '大数相加',
   icon: '',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/big-number')
+}, {
+  path: '/function/throw',
+  name: 'function',
+  title: 'throw使用',
+  icon: '',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/throw')
 }]
 // self-jsonstringify self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval
