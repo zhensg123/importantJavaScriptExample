@@ -11,4 +11,10 @@ export default [{
     title: '工作流程',
     icon: '',
     component: () => import(/* webpackChunkName: "css" */ '@/views/tool/flow.vue')
+  },{
+    path: '/tool/hightlight',
+    name: 'tool',
+    title: 'hightlight',
+    icon: '',
+    component: () => import(/* webpackChunkName: "css" */ '@/views/tool/hightlight.vue')
   }]

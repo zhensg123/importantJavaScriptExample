@@ -27,9 +27,16 @@ import 'codemirror/lib/codemirror.css'
 Vue.use(VueCodemirror)
 // import '@/components' // 导入全局组件
 Vue.use(plugin)
+console.log(directives, 'directives')
 Object.keys(filters).forEach(key => Vue.filter(key, filters[key]))
 Object.keys(directives).forEach(key => Vue.directive(key, directives[key]))
-Vue.config.productionTip = false
+
+// Vue.directive('highlight', function (el) {
+//   const blocks = el.querySelectorAll('pre code')
+//   blocks.forEach((block) => {
+//     hljs.highlightBlock(block)
+//   })
+// })
 
 new Vue({
   router,

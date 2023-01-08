@@ -5,7 +5,7 @@ import configRoutes from './modules'
 import E403 from '@/views/E403'
 import E404 from '@/views/E404'
 Vue.use(VueRouter)
-
+console.log(configRoutes, 'configRoutesconfigRoutes')
 const routes = [
   {
     path: '/',
