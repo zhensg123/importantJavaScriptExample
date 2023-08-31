@@ -1,6 +1,6 @@
 <template>
   <div>
-    <showCode :title="title" :code.sync='code'></showCode>
+    <showCode :title="title" :code.sync="code"></showCode>
   </div>
 </template>
 <script>
@@ -27,7 +27,8 @@ export default {
     }
   },
   mounted () {
-    function curry1 (fn, currArgs) { // 这里的fn就是sum方法
+    function curry1 (fn, currArgs) {
+      // 这里的fn就是sum方法
       return function () {
         let args = [].slice.call(arguments)
         // 首次调用时未提供参数currArgs，因此不用进行拼接执行
@@ -42,24 +43,27 @@ export default {
       }
     }
     // 其实上栗中的add方法，就是下面这个函数的柯里化函数，只不过我们并没有使用通用式来转化，而是自己封装
-    function add (...args) {
-      return args.reduce((a, b) => a + b)
+
+    function add (a, b, c) {
+      return a + b + c
+    }
+    // 函数柯里化
+    function binCurrying (fn) {
+      function curried (...args) {
+        if (args.length >= fn.length) {
+          return fn.apply(this, args) // 参数已满时
+        } else {
+          return function (...args2) {
+            return curried.apply(this, [...args, ...args2]) // 参数未满时
+          }
+        }
+      }
+      return curried
     }
 
-    console.log(add(1,2)(2), '22222222')
-    // 函数柯里化
-    function curry2 (fn, currArgs) {
-      return function () {
-        let args = Array.from(arguments)
-        if (currArgs !== undefined) {
-          args = args.concat(currArgs)
-        }
-        if (args.length < fn.length) {
-          return curry2(fn, args)
-        }
-        return fn.apply(null, args)
-      }
-    }
+    const adds = binCurrying(add)
+    console.log(adds(1)(2)(3), adds(2)(3)); // 6
+    
   }
 }
 </script>

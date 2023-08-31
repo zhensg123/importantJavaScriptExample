@@ -78,12 +78,11 @@ export default {
     const BFSARR = []
     // Breadth First Search
     function BFS (obj) {
-      const undo = []
       if (obj === null || typeof obj !== 'object') return
-      undo.unshift(obj)
+      const undo = [obj]
       while (undo.length) {
         const item = undo.shift()
-        Object.entries(item).map(([key, val]) => {
+        Object.entries(item).forEach(([key, val]) => {
           BFSARR.push(key)
           undo.push(val)
         })
@@ -92,16 +91,13 @@ export default {
     }
     console.log(BFS(obj), '广度优先遍历')
 
-    
     const DFSARR = []
     // Depth First Search
     function DFS (obj) {
       if (obj === null || typeof obj !== 'object') return
-      Object.entries(obj).map(([k, v], index) => {
+      Object.entries(obj).forEach(([k, v]) => {
         DFSARR.push(k)
-        if (typeof v === 'object') {
-          DFS(v)
-        }
+        DFS(v)
       })
       return DFSARR
     }
