@@ -42,12 +42,10 @@ export default {
     },
     // 获取真实显示列表数据
     visibleData () {
-        console.log(this.end, this.listData.length, this.listData.slice(this.start, Math.min(this.end, this.listData.length)), 'this.listData.slice(this.start, Math.min(this.end, this.listData.length))')
       return this.listData.slice(this.start, Math.min(this.end, this.listData.length))
     }
   },
   mounted () {
-      console.log(this.$el.clientHeight, '2')
     this.screenHeight = this.$el.clientHeight
     this.start = 0
     this.end = this.start + this.visibleCount

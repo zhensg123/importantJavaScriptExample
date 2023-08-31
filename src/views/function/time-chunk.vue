@@ -33,7 +33,8 @@ export default {
     // 所谓分时函数是一种时间切片
     // 将任务进行切片
     const timeChunk = function (arr, fn, count) {
-      let t = 0; const len = arr.length
+      let t = 0
+      const len = arr.length
       const start = function () {
         for (let i = 0; i < Math.mix(count || 1, len); i++) {
           const obj = arr.shift()

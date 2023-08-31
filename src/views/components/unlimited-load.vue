@@ -1,7 +1,6 @@
 <template>
   <div>
-      <showCode :title="title" :code.sync="code"></showCode>
-
+    <showCode :title="title" :code.sync="code"></showCode>
     <div class="parent-div">
       <ol class="list-box">
         <li></li>
@@ -22,8 +21,8 @@
 export default {
   data () {
     return {
-       title: '实现一个无限加载的效果',
-       code: ` class NoLimitLoad {
+      title: '实现一个无限加载的效果',
+      code: ` class NoLimitLoad {
       constructor () {
         this.pagesize = 10
         this.wrapper = document.querySelector('.parent-div')
@@ -60,9 +59,7 @@ export default {
     load.init()`
     }
   },
-  methods: {
-
-  },
+  methods: {},
   mounted () {
     class NoLimitLoad {
       constructor () {
