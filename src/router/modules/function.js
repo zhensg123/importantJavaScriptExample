@@ -118,5 +118,11 @@ export default [{
   title: 'throw使用',
   icon: '',
   component: () => import(/* webpackChunkName: "function" */ '@/views/function/throw')
+}, {
+  path: '/function/function-map',
+  name: 'function',
+  title: '对象数组遍历',
+  icon: '',
+  component: () => import(/* webpackChunkName: "function" */ '@/views/function/function-map')
 }]
 // self-jsonstringify self-new  create-js  closure  instanceof  promise-chunk  for-in-break  function-currying  self-setinterval

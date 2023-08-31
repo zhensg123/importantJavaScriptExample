@@ -43,6 +43,22 @@ export default {
         for (let i = 0; i < len; i++) {
           this.cache[key][i]()
         }
+      },
+      remove (key, fn) {
+        const fns = this.cache[key]
+        if (!fns) {
+          return false
+        }
+        if (!fn) {
+          fns && (fns.length = 0)
+        } else {
+          for (let l = fns.length - 1; l >= 0; l--) {
+            const _fn = fns[l]
+            if (_fn === fn) {
+              fns.splice(l, 1)
+            }
+          }
+        }
       }
     }
   }
