@@ -1,62 +1,57 @@
 <template>
 <div class="render-show">
   <div>
-    <VirtualLists :listData="data">
-       <template slot-scope="{value, index}">
-          <!-- <div class="render-list-item" :style="{height: height}">{{value}}</div> -->
-          <component :is="value" :index="index"></component>
+    <VirtualList :listData="data">
+       <template slot-scope="{type, index}">
+          <component :is="type" :index="index"></component>
        </template>
-    </VirtualLists>
+    </VirtualList>
   </div>
+  <el-button @click="appendData">添加数据</el-button>
 </div>
 </template>
 
 <script>
 import VirtualList from './parts/VirtualList'
-import VirtualLists from './parts/VirtualLists'
 
 import Height20 from './parts/Height20'
 import Height30 from './parts/Height30'
 import Height50 from './parts/Height50'
 
 const d = []
-for (let i = 0; i < 1000; i++) {
-  d.push({ id: i, value: i, height: 18 })
-}
-const dd = []
-
-for (let i = 0; i < 1000; i++) {
+for (let i = 0; i < 30; i++) {
   const type = i % 3 === 0 ? i % 2 === 0 ? 'Height30' : 'Height50' : 'Height20'
-  dd.push({ id: i, value: i, type: type, height: type === 'Height30' ? 30 : type === 'Height20' ? 20 : 50 })
+  d.push({ id: i, value: i, type: type, height: type === 'Height30' ? 30 : type === 'Height20' ? 20 : 50 })
 }
+console.log(d.length, 'd')
 export default {
-  name: 'App',
+  name: 'VirtualList-test',
   data () {
     return {
-      data: dd
+      data: d
     }
   },
   components: {
     VirtualList,
     Height20,
     Height30,
-    Height50,
-    VirtualLists
+    Height50
+  },
+  methods: {
+    appendData () {
+      const d = []
+      for (let i = 0; i < 10; i++) {
+        const type = i % 3 === 0 ? i % 2 === 0 ? 'Height30' : 'Height50' : 'Height20'
+        d.push({ id: i, value: i, type: type, height: type === 'Height30' ? 30 : type === 'Height20' ? 20 : 50 })
+      }
+      this.data.concat(d)
+    }
   }
 }
 </script>
 
 <style>
-html{
-  height: 100%;
-}
-body{
-  height: 100%;
-  margin:0;
-}
-#app{
-  height:100%;
-}
+
 .render-show {
   display: flex;
   justify-content: center;

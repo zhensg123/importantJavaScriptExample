@@ -1,12 +1,11 @@
 <template>
   <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
-    <div
-      class="render-list-phantom"
-      :style="{ height: listHeight + 'px' }"
-    ></div>
+    <div class="render-list-phantom" :style="{ height: listHeight + 'px' }"></div>
     <div class="render-list" :style="{ transform: getTransform }">
-      <template v-for="item in visibleData">
-        <slot :type="item.type" :index="item.id"></slot>
+      <template
+        v-for="item in visibleData"
+      >
+        <slot :value="item.value" :type="item.type" :height="item.height + 'px'"  :index="item.id"></slot>
       </template>
     </div>
   </div>
@@ -20,28 +19,21 @@ export default {
     listData: {
       type: Array,
       default: () => []
+    },
+    // 每项高度
+    itemSize: {
+      type: Number,
+      default: 50
     }
   },
   computed: {
     // 列表总高度
     listHeight () {
-      return this.listData.reduce((acc, curVal) => {
-        return acc + curVal.height
-      }, 0)
+      return this.listData.length * this.itemSize
     },
     // 可显示的列表项数
     visibleCount () {
-      let accHeight = 0
-      let count = 0
-      for (let i = 0; i < this.listData.length; i++) {
-        accHeight += this.listData[i].height
-        if (accHeight >= this.screenHeight) {
-          count++
-          break
-        }
-        count++
-      }
-      return count
+      return Math.ceil(this.screenHeight / this.itemSize)
     },
     // 偏移量对应的style
     getTransform () {
@@ -49,10 +41,7 @@ export default {
     },
     // 获取真实显示列表数据
     visibleData () {
-      return this.listData.slice(
-        this.start,
-        Math.min(this.end, this.listData.length)
-      )
+      return this.listData.slice(this.start, Math.min(this.end, this.listData.length))
     }
   },
   mounted () {
@@ -72,37 +61,21 @@ export default {
     }
   },
   methods: {
-    getStart (scrollTop) {
-      let height = 0
-      let i = 0
-      while (true) {
-        const currentItem = this.listData[i].height
-        height += currentItem
-        if (height >= scrollTop) {
-          ++i
-          break
-        }
-        i++
-      }
-
-      return i
-    },
     scrollEvent () {
       // 当前滚动位置
       const scrollTop = this.$refs.list.scrollTop
       // 此时的开始索引
-      this.start = this.getStart(scrollTop)
+      this.start = Math.floor(scrollTop / this.itemSize)
       // 此时的结束索引
       this.end = this.start + this.visibleCount
-      const offsetHeight = scrollTop - (this.visibleData.reduce((acc, curVal) => acc + curVal.height, 0) - this.screenHeight)
       // 此时的偏移量
-      this.startOffset = offsetHeight < 0 ? 0 : offsetHeight
+      this.startOffset = scrollTop - (scrollTop % this.itemSize)
     }
   }
 }
 </script>
 
-  <style scoped>
+<style scoped>
 .render-list-container {
   overflow: auto;
   position: relative;
@@ -120,4 +93,5 @@ export default {
 .render-list {
   text-align: center;
 }
+
 </style>

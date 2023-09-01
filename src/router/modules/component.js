@@ -60,6 +60,12 @@ export default [{
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/virtual-list.vue')
 }, {
+  path: '/component/cache-virtual-list',
+  name: 'component',
+  title: '有缓冲区虚拟列表',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/cache-virtual-list.vue')
+}, {
   path: '/component/comthis',
   name: 'component',
   title: '组件this',

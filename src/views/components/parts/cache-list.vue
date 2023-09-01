@@ -1,20 +1,21 @@
 <template>
-  <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
-    <div
-      class="render-list-phantom"
-      :style="{ height: listHeight + 'px' }"
-    ></div>
-    <div class="render-list" :style="{ transform: getTransform }">
-      <template v-for="item in visibleData">
-        <slot :value="item.type" :index="item.id"></slot>
-      </template>
+    <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
+      <div
+        class="render-list-phantom"
+        :style="{ height: listHeight + 'px' }"
+      ></div>
+      <div class="render-list" :style="{ transform: getTransform }">
+        <template v-for="item in visibleData">
+          <slot :type="item.type" :index="item.id"></slot>
+        </template>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
 
 <script>
+
 export default {
-  name: 'VirtualLists',
+  name: 'VirtualList',
   props: {
     // 所有列表数据
     listData: {
@@ -73,24 +74,19 @@ export default {
   },
   methods: {
     getStart (scrollTop) {
-      var height = 0
-      var start = 0
-      var i = 0
+      let height = 0
+      let i = 0
       while (true) {
         const currentItem = this.listData[i].height
-        if (currentItem) {
-          height += currentItem
-          if (height >= scrollTop) {
-            start = i
-            break
-          }
-        } else {
+        height += currentItem
+        if (height >= scrollTop) {
+          ++i
           break
         }
         i++
       }
 
-      return start
+      return i
     },
     scrollEvent () {
       // 当前滚动位置
@@ -99,32 +95,33 @@ export default {
       this.start = this.getStart(scrollTop)
       // 此时的结束索引
       this.end = this.start + this.visibleCount
-      const offsetHeight = scrollTop - (this.visibleData.reduce((acc, curVal) => {
-        return acc + curVal.height
-      }, 0) - this.screenHeight)
+      const offsetHeight = scrollTop - (this.visibleData.reduce((acc, curVal) => acc + curVal.height, 0) - this.screenHeight)
       // 此时的偏移量
       this.startOffset = offsetHeight < 0 ? 0 : offsetHeight
+      if (this.end + 1 >= this.listData.length) {
+        this.$emit('repeatGetListData', this.listData.length)
+      }
     }
   }
 }
 </script>
 
-  <style scoped>
-.render-list-container {
-  overflow: auto;
-  position: relative;
-  -webkit-overflow-scrolling: touch;
-  height: 200px;
-}
+    <style scoped>
+  .render-list-container {
+    overflow: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    height: 200px;
+  }
 
-.render-list-phantom {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: -1;
-}
+  .render-list-phantom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
 
-.render-list {
-  text-align: center;
-}
-</style>
+  .render-list {
+    text-align: center;
+  }
+  </style>
