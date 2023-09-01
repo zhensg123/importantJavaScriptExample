@@ -13,8 +13,8 @@ export default {
   },
   methods: {
     handleClick () {
-      this.$emit('Base-click',{
-        msg:'子组件emit'
+      this.$emit('Base-click', {
+        msg: '子组件emit'
       })
     }
   }

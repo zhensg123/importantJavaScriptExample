@@ -1,12 +1,15 @@
-<template>
+<!-- <template>
     <div>使用throw</div>
-</template>
+</template> -->
 <script>
 export default {
   data () {
     return {
       testArr: [1, 2, 3, 4]
     }
+  },
+  render(h){
+    return h('div', this.testArr)
   },
   methods: {
     mymap () {
