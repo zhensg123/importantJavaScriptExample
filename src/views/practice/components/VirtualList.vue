@@ -1,20 +1,21 @@
 <template>
-  <div ref="list" class="infinite-list-container" @scroll="scrollEvent($event)">
-    <div class="infinite-list-phantom" :style="{ height: listHeight + 'px' }"></div>
-    <div class="infinite-list" :style="{ transform: getTransform }">
-      <div ref="items"
-        class="infinite-list-item"
+  <div ref="container" class="render-list-container" @scroll="scrollEvent($event)">
+    <div class="render-list-phantom" :style="{ height: listHeight + 'px' }"></div>
+    <div class="render-list" :style="{ transform: getTransform }">
+      <div
+        ref="items"
+        class="render-list-item"
         v-for="item in visibleData"
         :key="item.id"
-        :style="{ height: itemSize + 'px',lineHeight: itemSize + 'px' }"
-      >{{ item.value }}</div>
+        :style="{ height: itemSize + 'px', lineHeight: itemSize + 'px' }"
+      >
+        {{ item.value }}
+      </div>
     </div>
   </div>
 </template>
-
 <script>
 export default {
-  name: 'VirtualList',
   props: {
     // 所有列表数据
     listData: {
@@ -34,7 +35,7 @@ export default {
     },
     // 可显示的列表项数
     visibleCount () {
-      return Math.ceil(this.screenHeight / this.itemSize)
+      return Math.ceil(this.visibleHeight / this.itemSize)
     },
     // 偏移量对应的style
     getTransform () {
@@ -42,20 +43,18 @@ export default {
     },
     // 获取真实显示列表数据
     visibleData () {
-        // console.log(this.end, this.listData.length, this.listData.slice(this.start, Math.min(this.end, this.listData.length)), 'this.listData.slice(this.start, Math.min(this.end, this.listData.length))')
+      // console.log(this.end, this.listData.length, this.listData.slice(this.start, Math.min(this.end, this.listData.length)), 'this.listData.slice(this.start, Math.min(this.end, this.listData.length))')
       return this.listData.slice(this.start, Math.min(this.end, this.listData.length))
     }
   },
   mounted () {
-      console.log(this.$el.clientHeight, '2')
-    this.screenHeight = this.$el.clientHeight
-    this.start = 0
+    this.visibleHeight = this.$refs.container.clientHeight
     this.end = this.start + this.visibleCount
   },
   data () {
     return {
       // 可视区域高度
-      screenHeight: 0,
+      visibleHeight: 0,
       // 偏移量
       startOffset: 0,
       // 起始索引
@@ -67,7 +66,7 @@ export default {
   methods: {
     scrollEvent () {
       // 当前滚动位置
-      const scrollTop = this.$refs.list.scrollTop
+      const scrollTop = this.$refs.container.scrollTop
       // 此时的开始索引
       this.start = Math.floor(scrollTop / this.itemSize)
       // 此时的结束索引
@@ -78,17 +77,17 @@ export default {
   }
 }
 </script>
-
-<style scoped>
-.infinite-list-container {
+<style lang="scss" scoped>
+.render-list-container {
   height: 100%;
   overflow: auto;
   position: relative;
   -webkit-overflow-scrolling: touch;
   height: 500px;
+  width: 500px;
 }
 
-.infinite-list-phantom {
+.render-list-phantom {
   position: absolute;
   left: 0;
   top: 0;
@@ -96,7 +95,7 @@ export default {
   z-index: -1;
 }
 
-.infinite-list {
+.render-list {
   left: 0;
   right: 0;
   top: 0;
@@ -104,10 +103,10 @@ export default {
   text-align: center;
 }
 
-.infinite-list-item {
-  padding: 10px;
+.render-list-item {
   color: #555;
   box-sizing: border-box;
   border-bottom: 1px solid #999;
 }
+
 </style>

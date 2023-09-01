@@ -44,6 +44,10 @@ const menus = {
   vuek: {
     name: 'vue知识点',
     icon: 'icon-liulanqi'
+  },
+  practice: {
+    name: '实践',
+    icon: 'icon-liulanqi'
   }
 }
 const menuArr = Object.keys(menus).map((menu) => {
