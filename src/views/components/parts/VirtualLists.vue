@@ -25,13 +25,22 @@ export default {
   computed: {
     // 列表总高度
     listHeight () {
-      return this.listData.length * this.itemSize
+      return this.listData.reduce((acc, curVal) => {
+        return acc.height + curVal
+      }, 0)
     },
     // 可显示的列表项数
     visibleCount () {
-      return this.listData.forEach((item) => {
-        item.height
-      })
+      let accHeight = 0
+      let count = 0
+      for (let i = 0; i < this.listData.length; i++) {
+        accHeight += this.listData[i].height
+        count++
+        if (accHeight >= this.screenHeight) {
+          break
+        }
+      }
+      return count
     },
     // 偏移量对应的style
     getTransform () {
