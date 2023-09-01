@@ -41,10 +41,6 @@ export default {
     },
     // 获取真实显示列表数据
     visibleData () {
-<<<<<<< HEAD
-        // console.log(this.end, this.listData.length, this.listData.slice(this.start, Math.min(this.end, this.listData.length)), 'this.listData.slice(this.start, Math.min(this.end, this.listData.length))')
-=======
->>>>>>> 3c4b2b0ad8c5ed13b83535f9e68be04b4b892147
       return this.listData.slice(this.start, Math.min(this.end, this.listData.length))
     }
   },

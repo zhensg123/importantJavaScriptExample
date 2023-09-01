@@ -6,7 +6,7 @@
     ></div>
     <div class="render-list" :style="{ transform: getTransform }">
       <template v-for="item in visibleData">
-        <slot :value="item.type"></slot>
+        <slot :value="item.type" :index="item.id"></slot>
       </template>
     </div>
   </div>
@@ -26,7 +26,7 @@ export default {
     // 列表总高度
     listHeight () {
       return this.listData.reduce((acc, curVal) => {
-        return acc.height + curVal
+        return acc + curVal.height
       }, 0)
     },
     // 可显示的列表项数
@@ -35,10 +35,11 @@ export default {
       let count = 0
       for (let i = 0; i < this.listData.length; i++) {
         accHeight += this.listData[i].height
-        count++
         if (accHeight >= this.screenHeight) {
+          count++
           break
         }
+        count++
       }
       return count
     },
@@ -76,7 +77,7 @@ export default {
       var start = 0
       var i = 0
       while (true) {
-        const currentItem = childrenHeight[i]
+        const currentItem = this.listData[i].height
         if (currentItem) {
           height += currentItem
           if (height >= scrollTop) {
@@ -95,11 +96,14 @@ export default {
       // 当前滚动位置
       const scrollTop = this.$refs.list.scrollTop
       // 此时的开始索引
-      this.start = Math.floor(scrollTop / this.itemSize)
+      this.start = this.getStart(scrollTop)
       // 此时的结束索引
       this.end = this.start + this.visibleCount
+      const offsetHeight = scrollTop - (this.visibleData.reduce((acc, curVal) => {
+        return acc + curVal.height
+      }, 0) - this.screenHeight)
       // 此时的偏移量
-      this.startOffset = scrollTop - (scrollTop % this.itemSize)
+      this.startOffset = offsetHeight < 0 ? 0 : offsetHeight
     }
   }
 }

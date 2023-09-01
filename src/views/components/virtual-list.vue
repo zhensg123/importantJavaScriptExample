@@ -2,10 +2,9 @@
 <div class="render-show">
   <div>
     <VirtualLists :listData="data">
-       <template slot-scope="{value}">
-        {{ value }}
+       <template slot-scope="{value, index}">
           <!-- <div class="render-list-item" :style="{height: height}">{{value}}</div> -->
-          <!-- <component :is="value"></component> -->
+          <component :is="value" :index="index"></component>
        </template>
     </VirtualLists>
   </div>
@@ -28,7 +27,7 @@ const dd = []
 
 for (let i = 0; i < 1000; i++) {
   const type = i % 3 === 0 ? i % 2 === 0 ? 'Height30' : 'Height50' : 'Height20'
-  dd.push({ id: i, value: i, type: type })
+  dd.push({ id: i, value: i, type: type, height: type === 'Height30' ? 30 : type === 'Height20' ? 20 : 50 })
 }
 export default {
   name: 'App',
