@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-      <VirtualList :listData="data" :itemSize="50"/>
+      <VirtualList :listData="data" :itemSize="20"/>
     </div>
     </template>
 

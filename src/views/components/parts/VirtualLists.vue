@@ -20,9 +20,22 @@ export default {
     listData: {
       type: Array,
       default: () => []
+    },
+    // 缓冲区数量
+    bufferScale: {
+      type: Number,
+      default: 3
     }
+
   },
   computed: {
+    aboveCount () {
+      // const preNum = this.start - this.bufferScale
+      return Math.min(this.start, this.bufferScale)
+    },
+    belowCount () {
+      return Math.min(this.listData.length - this.end, this.bufferScale)
+    },
     // 列表总高度
     listHeight () {
       return this.listData.reduce((acc, curVal) => {
@@ -49,9 +62,12 @@ export default {
     },
     // 获取真实显示列表数据
     visibleData () {
+      // 只是修改了渲染的条数
+      const start = this.start - this.aboveCount
+      const end = this.end + this.belowCount
       return this.listData.slice(
-        this.start,
-        Math.min(this.end, this.listData.length)
+        start,
+        Math.min(end, this.listData.length)
       )
     }
   },
@@ -99,9 +115,12 @@ export default {
       this.start = this.getStart(scrollTop)
       // 此时的结束索引
       this.end = this.start + this.visibleCount
-      const offsetHeight = scrollTop - (this.visibleData.reduce((acc, curVal) => {
-        return acc + curVal.height
-      }, 0) - this.screenHeight)
+      const offsetHeight =
+        scrollTop -
+        (this.visibleData.reduce((acc, curVal) => {
+          return acc + curVal.height
+        }, 0) -
+          this.screenHeight)
       // 此时的偏移量
       this.startOffset = offsetHeight < 0 ? 0 : offsetHeight
     }

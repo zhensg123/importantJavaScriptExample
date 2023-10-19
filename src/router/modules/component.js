@@ -65,6 +65,19 @@ export default [{
   title: '组件this',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/comthis.vue')
+}, {
+  path: '/component/tooltip',
+  name: 'component',
+  title: '文字提示组件',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/tooltip.vue')
+}, {
+  path: '/component/virtualScroll',
+  name: 'component',
+  title: '虚拟滚动',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/virtualScroll.vue')
 }]
+
 // virtual-list
 // carousel table-warp  hoc render1 function-component
