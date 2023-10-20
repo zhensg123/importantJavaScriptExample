@@ -9,13 +9,14 @@
   </div>
 </template>
 <script>
+const HandleMixHeight = 20
 export default {
   data () {
     return {
       list: 1000,
       contentOffset: 0,
       handleOffset: 0,
-      handleHeight: 20
+      handleHeight: HandleMixHeight
     }
   },
   computed: {
@@ -26,7 +27,7 @@ export default {
       return `translate3d(0,${this.handleOffset}px,0)`
     },
     handleStyleHeight () {
-      return `${this.handleHeight}px`
+      return this.handleHeight > HandleMixHeight ? `${this.handleHeight}px` : `${HandleMixHeight}px`
     }
   },
   methods: {
@@ -83,8 +84,7 @@ export default {
     this.$nextTick(() => {
       this.saveHtmlElementById()
     })
-  },
-  mounted () {}
+  }
 }
 </script>
 <style lang="scss" scoped>
