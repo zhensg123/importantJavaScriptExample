@@ -89,6 +89,12 @@ export default [{
   title: 'better-scroll示例',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/better-scroll.vue')
+}, {
+  path: '/component/virtual-scroll',
+  name: 'component',
+  title: 'virtual-scroll虚拟滚动',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/virtual-scroll.vue')
 }]
 
 // virtual-list

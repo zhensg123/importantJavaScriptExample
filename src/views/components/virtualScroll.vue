@@ -11,7 +11,7 @@
 </template>
 
 <script >
-import VirtualScroll from './virtualScroll.js'
+import VirtualScroll from './class/virtualScroll.js'
 export default {
   data () {
     return {}
@@ -25,7 +25,7 @@ export default {
     var $perfNC = document.querySelector('.js-perf-nc')
 
     var list = []
-    for (let i = 0; i < 100000; i++) {
+    for (let i = 0; i < 100; i++) {
       list.push(i)
     }
 

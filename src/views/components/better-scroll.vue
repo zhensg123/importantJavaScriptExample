@@ -24,7 +24,7 @@ export default {
   computed: {
     visibleData () {
       // 计算可视区域内的数据
-      return this.data.slice(this.startIndex, this.startIndex + this.visibleCount)
+      return this.data
     }
   },
   mounted () {
