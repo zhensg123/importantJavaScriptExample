@@ -1,10 +1,14 @@
 <template>
   <div id="vs-container" ref="container">
-    <div id="vs-content" ref="content" :style="{ transform: contentTransform }">
+    <div id="vs-content" :style="{ transform: contentTransform }">
       <p :key="num" v-for="num in list">{{ num }}</p>
     </div>
     <div id="vs-slider" ref="slider">
-      <div id="vs-handle"  :style="{ transform: handleTransform, height: handleStyleHeight }" ref="handle"></div>
+      <div
+        id="vs-handle"
+        :style="{ transform: handleTransform, height: handleStyleHeight }"
+        ref="handle"
+      ></div>
     </div>
   </div>
 </template>
@@ -13,7 +17,7 @@ const HandleMixHeight = 20
 export default {
   data () {
     return {
-      list: 1000,
+      list: 10,
       contentOffset: 0,
       handleOffset: 0,
       handleHeight: HandleMixHeight,
@@ -32,8 +36,39 @@ export default {
     }
   },
   methods: {
+    transformOffset (to = 'handle') {
+      const { $container, $slider } = this.$element
+      const contentSpace = $container.scrollHeight - $container.offsetHeight
+      const handleSpace = $slider.offsetHeight - this.handleHeight
+      const assistRatio = handleSpace / contentSpace // 小于1
+      const _this = this
+      const computedOffset = {
+        handle () {
+          if (_this.ratio > 1) {
+            return -_this.contentOffset * assistRatio
+          }
+          return (
+            -$slider.offsetHeight *
+            (_this.contentOffset / $container.scrollHeight)
+          )
+        },
+        content () {
+          if (_this.ratio > 1) {
+            return -_this.handleOffset / assistRatio
+          }
+          return (
+            (-_this.handleOffset * $container.scrollHeight) /
+            $slider.offsetHeight
+          )
+        }
+      }
+      return computedOffset[to]()
+    },
     bindEvent () {
-      const contentSpace = this.$content.offsetHeight - this.$container.offsetHeight
+      const { $container, $slider, $handle } = this.$element
+      const contentSpace = $container.scrollHeight - $container.offsetHeight
+      const handleSpace = $slider.offsetHeight - this.handleHeight
+
       const bindContainerOffset = (event) => {
         event.preventDefault()
         this.contentOffset += event.deltaY
@@ -44,19 +79,21 @@ export default {
         }
       }
       const updateHandleOffset = () => {
-        this.handleOffset = -this.$slider.offsetHeight * (this.contentOffset / this.$container.scrollHeight)
+        this.handleOffset = this.transformOffset()
       }
-      this.$container.addEventListener('wheel', bindContainerOffset)
-      this.$container.addEventListener('wheel', updateHandleOffset)
+      $container.addEventListener('wheel', bindContainerOffset)
+      $container.addEventListener('wheel', updateHandleOffset)
 
-      const handleSpace = this.$slider.offsetHeight - this.handleHeight
-      this.$handle.onmousedown = (e) => {
+      $handle.onmousedown = (e) => {
         const startY = e.clientY
         const startTop = this.handleOffset
         window.onmousemove = (e) => {
           const deltaX = e.clientY - startY
-          this.handleOffset = startTop + deltaX < 0 ? 0 : Math.min(startTop + deltaX, handleSpace)
-          this.contentOffset = -this.handleOffset * this.$container.scrollHeight / this.$slider.offsetHeight
+          this.handleOffset =
+            startTop + deltaX < 0
+              ? 0
+              : Math.min(startTop + deltaX, handleSpace)
+          this.contentOffset = this.transformOffset('content')
         }
 
         window.onmouseup = function () {
@@ -66,32 +103,35 @@ export default {
       }
     },
     saveHtmlElementById () {
-      const { container, content, slider, handle } = this.$refs
-      this.$container = container // 容器
-      this.$content = content // 内容
-      this.$slider = slider // 滑道
-      this.$handle = handle // 手柄或滑块
-
+      const { container, slider, handle } = this.$refs
+      this.$element = {
+        $container: container,
+        $slider: slider,
+        $handle: handle
+      }
       this.initHandleHeight()
-    //   this.initTransferRatio()
+      this.initTransferRatio()
       this.bindEvent()
     },
     initHandleHeight () {
-      this.ratio = this.$container.offsetHeight /
-          this.$container.scrollHeight
-      this.handleHeight = this.$slider.offsetHeight * this.ratio
+      const { $container, $slider } = this.$element
+      this.handleHeight =
+        ($slider.offsetHeight * $container.offsetHeight) /
+        $container.scrollHeight
+
+      // 最小值为HandleMixHeight
+      if (this.handleHeight < HandleMixHeight) {
+        this.handleHeight = HandleMixHeight
+      }
     },
     initTransferRatio () {
-      if (this.handleHeight > 20) {
-        return (this.ratio = 1)
-      }
+      const { $container, $slider } = this.$element
+      const handleRatioSlider = this.handleHeight / $slider.offsetHeight
+      const containerClientRatioScroll =
+        $container.offsetHeight / $container.scrollHeight
 
-      this.handleHeight = HandleMixHeight
-      const handleRatioSlider = HandleMixHeight / this.$slider.offsetHeight
-      const containerClientRatioScroll = this.$container.offsetHeight /
-          this.$container.scrollHeight
-      // 由于手柄有最小值所以 this.ratio > 1
-
+      // 由于手柄高度有最小值所以 this.ratio 可能 > 1
+      // 如果this.ratio大于1 则需要单独进行偏移量转换
       this.ratio = handleRatioSlider / containerClientRatioScroll
     }
   },
@@ -111,27 +151,29 @@ export default {
   overflow: hidden;
   width: 500px;
   position: relative;
+  box-sizing: border-box;
 
-  #vs-content {
-
-  }
   #vs-slider {
     position: absolute;
-    top:0;
-    right:0;
+    top: 0;
+    right: 0;
     bottom: 0;
     width: 10px;
     box-sizing: border-box;
     // border-radius: 10px;
     background-color: #6b6b6b;
+    -webkit-user-select: none; /* Safari/Chrome */
+    -moz-user-select: none; /* Firefox */
+    -ms-user-select: none; /* Internet Explorer/Edge */
+    user-select: none; /* Standard */
     #vs-handle {
       background-color: #f1f2f3;
       cursor: pointer;
       border-radius: 10px;
       -webkit-user-select: none; /* Safari/Chrome */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Standard */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* Internet Explorer/Edge */
+      user-select: none; /* Standard */
     }
   }
 }
