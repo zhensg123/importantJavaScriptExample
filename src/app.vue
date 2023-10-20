@@ -84,6 +84,7 @@ export default {
   watch: {
     $route: {
       handler (route) {
+        console.log(menuList, 'menuList')
         const obj = menuList.find((item) => {
           return item.children.find((child) => child.path === route.path)
         })
