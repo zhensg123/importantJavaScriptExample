@@ -5,7 +5,7 @@
     <p>数据条数：100,000</p>
     <p>渲染耗时：<span class="js-perf-v"></span></p>
     <div class="container">
-      <div class="border"></div>
+      <!-- <div class="border"></div> -->
     </div>
   </div>
 </template>
