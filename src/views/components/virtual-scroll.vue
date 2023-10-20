@@ -16,7 +16,8 @@ export default {
       list: 1000,
       contentOffset: 0,
       handleOffset: 0,
-      handleHeight: HandleMixHeight
+      handleHeight: HandleMixHeight,
+      ratio: 1 // 转换虚拟滚动条/滑道与容器cilentHeight/scrollHeight
     }
   },
   computed: {
@@ -27,7 +28,7 @@ export default {
       return `translate3d(0,${this.handleOffset}px,0)`
     },
     handleStyleHeight () {
-      return this.handleHeight > HandleMixHeight ? `${this.handleHeight}px` : `${HandleMixHeight}px`
+      return `${this.handleHeight}px`
     }
   },
   methods: {
@@ -43,7 +44,7 @@ export default {
         }
       }
       const updateHandleOffset = () => {
-        this.handleOffset = -this.$slider.offsetHeight * this.contentOffset / this.$container.scrollHeight
+        this.handleOffset = -this.$slider.offsetHeight * (this.contentOffset / this.$container.scrollHeight)
       }
       this.$container.addEventListener('wheel', bindContainerOffset)
       this.$container.addEventListener('wheel', updateHandleOffset)
@@ -72,12 +73,26 @@ export default {
       this.$handle = handle // 手柄或滑块
 
       this.initHandleHeight()
+    //   this.initTransferRatio()
       this.bindEvent()
     },
     initHandleHeight () {
-      this.handleHeight =
-        (this.$slider.offsetHeight * this.$container.clientHeight) /
+      this.ratio = this.$container.offsetHeight /
           this.$container.scrollHeight
+      this.handleHeight = this.$slider.offsetHeight * this.ratio
+    },
+    initTransferRatio () {
+      if (this.handleHeight > 20) {
+        return (this.ratio = 1)
+      }
+
+      this.handleHeight = HandleMixHeight
+      const handleRatioSlider = HandleMixHeight / this.$slider.offsetHeight
+      const containerClientRatioScroll = this.$container.offsetHeight /
+          this.$container.scrollHeight
+      // 由于手柄有最小值所以 this.ratio > 1
+
+      this.ratio = handleRatioSlider / containerClientRatioScroll
     }
   },
   created () {
