@@ -1,13 +1,12 @@
 <template>
   <div ref="container" class="render-list-container" @scroll="scrollEvent($event)">
     <div class="render-list-phantom" :style="{ height: listHeight + 'px' }"></div>
-    <div class="render-list" :style="{ transform: getTransform }">
+    <div class="render-list">
       <div
-        ref="items"
         class="render-list-item"
-        v-for="item in visibleData"
+        v-for="(item, index) in visibleData"
         :key="item.id"
-        :style="{ height: itemSize + 'px', lineHeight: itemSize + 'px' }"
+        :style="{ height: itemSize + 'px', top: startOffset + index * itemSize + 'px'}"
       >
         {{ item.value }}
       </div>
@@ -72,7 +71,7 @@ export default {
       // 此时的结束索引
       this.end = this.start + this.visibleCount
       // 此时的偏移量
-      this.startOffset = scrollTop - (scrollTop % this.itemSize)
+      this.startOffset = scrollTop
     }
   }
 }
@@ -83,8 +82,9 @@ export default {
   overflow: auto;
   position: relative;
   -webkit-overflow-scrolling: touch;
-  height: 500px;
+  height: 300px;
   width: 500px;
+  margin-top:200px;
 }
 
 .render-list-phantom {
@@ -104,6 +104,7 @@ export default {
 }
 
 .render-list-item {
+  position: absolute;
   color: #555;
   box-sizing: border-box;
   border-bottom: 1px solid #999;
