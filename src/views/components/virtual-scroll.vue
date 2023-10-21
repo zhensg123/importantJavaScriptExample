@@ -17,11 +17,10 @@ const HandleMixHeight = 20
 export default {
   data () {
     return {
-      list: 10,
+      list: 1000,
       contentOffset: 0,
       handleOffset: 0,
-      handleHeight: HandleMixHeight,
-      ratio: 1 // 转换虚拟滚动条/滑道与容器cilentHeight/scrollHeight
+      handleHeight: HandleMixHeight
     }
   },
   computed: {
@@ -44,34 +43,21 @@ export default {
       const _this = this
       const computedOffset = {
         handle () {
-          if (_this.ratio > 1) {
-            return -_this.contentOffset * assistRatio
-          }
-          return (
-            -$slider.offsetHeight *
-            (_this.contentOffset / $container.scrollHeight)
-          )
+          return -_this.contentOffset * assistRatio
         },
         content () {
-          if (_this.ratio > 1) {
-            return -_this.handleOffset / assistRatio
-          }
-          return (
-            (-_this.handleOffset * $container.scrollHeight) /
-            $slider.offsetHeight
-          )
+          return -_this.handleOffset / assistRatio
         }
       }
       return computedOffset[to]()
     },
-    bindEvent () {
-      const { $container, $slider, $handle } = this.$element
+    bindContainerEvent () {
+      const { $container } = this.$element
       const contentSpace = $container.scrollHeight - $container.offsetHeight
-      const handleSpace = $slider.offsetHeight - this.handleHeight
 
       const bindContainerOffset = (event) => {
         event.preventDefault()
-        this.contentOffset += event.deltaY
+        this.contentOffset += event.wheelDelta
         if (this.contentOffset < 0) {
           this.contentOffset = Math.max(this.contentOffset, -contentSpace)
         } else {
@@ -81,9 +67,12 @@ export default {
       const updateHandleOffset = () => {
         this.handleOffset = this.transformOffset()
       }
-      $container.addEventListener('wheel', bindContainerOffset)
-      $container.addEventListener('wheel', updateHandleOffset)
-
+      $container.addEventListener('mousewheel', bindContainerOffset)
+      $container.addEventListener('mousewheel', updateHandleOffset)
+    },
+    bindHandleEvent () {
+      const { $slider, $handle } = this.$element
+      const handleSpace = $slider.offsetHeight - this.handleHeight
       $handle.onmousedown = (e) => {
         const startY = e.clientY
         const startTop = this.handleOffset
@@ -110,8 +99,8 @@ export default {
         $handle: handle
       }
       this.initHandleHeight()
-      this.initTransferRatio()
-      this.bindEvent()
+      this.bindContainerEvent()
+      this.bindHandleEvent()
     },
     initHandleHeight () {
       const { $container, $slider } = this.$element
@@ -123,16 +112,6 @@ export default {
       if (this.handleHeight < HandleMixHeight) {
         this.handleHeight = HandleMixHeight
       }
-    },
-    initTransferRatio () {
-      const { $container, $slider } = this.$element
-      const handleRatioSlider = this.handleHeight / $slider.offsetHeight
-      const containerClientRatioScroll =
-        $container.offsetHeight / $container.scrollHeight
-
-      // 由于手柄高度有最小值所以 this.ratio 可能 > 1
-      // 如果this.ratio大于1 则需要单独进行偏移量转换
-      this.ratio = handleRatioSlider / containerClientRatioScroll
     }
   },
   created () {
