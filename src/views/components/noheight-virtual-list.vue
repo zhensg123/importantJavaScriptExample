@@ -1,41 +1,69 @@
 <template>
     <div class="render-show">
       <div>
-        <VirtualList :listData="data">
-           <template slot-scope="{type, index}">
-              <component :is="type" :index="index"></component>
+        <unknow-height-virtual-list :listData="data">
+           <template slot-scope="{value, index}">
+              <div class="unit">{{index}}.{{ value }}</div>
            </template>
-        </VirtualList>
+        </unknow-height-virtual-list>
       </div>
-      <el-button @click="appendData">添加数据</el-button>
     </div>
     </template>
 
 <script>
-import VirtualList from './parts/VirtualList'
+import unknowHeightVirtualList from './parts/unknow-height-virtual-list'
 
-import Height20 from './parts/Height20'
-import Height30 from './parts/Height30'
-import Height50 from './parts/Height50'
+function generateRandomNumber () {
+  const min = 100
+  const max = 1000
 
+  // 生成随机整数
+  const randomNumber = Math.floor(Math.random() * (max - min + 1)) + min
+
+  return randomNumber
+}
+function getRandomLetter () {
+  const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+  const randomIndex = Math.floor(Math.random() * letters.length)
+  const randomLetter = letters.charAt(randomIndex)
+  return randomLetter
+}
+function generateString (length) {
+  const minLength = 100
+  const maxLength = 1000
+
+  // 确保长度在最小和最大范围内
+  if (length < minLength) {
+    length = minLength
+  } else if (length > maxLength) {
+    length = maxLength
+  }
+
+  // 生成字符串
+  const string = getRandomLetter().repeat(length)
+
+  return string
+}
 const d = []
-for (let i = 0; i < 30; i++) {
-  const type = i % 3 === 0 ? i % 2 === 0 ? 'Height30' : 'Height50' : 'Height20'
-  d.push({ id: i, value: i, type: type, height: type === 'Height30' ? 30 : type === 'Height20' ? 20 : 50 })
+for (let i = 0; i < 500; i++) {
+  const length = generateRandomNumber()
+  d.push({
+    data: generateString(length),
+    index: i
+  })
+//   const type = i % 3 === 0 ? i % 2 === 0 ? 'Height30' : 'Height50' : 'Height20'
+//   d.push({ id: i, value: i, type: type, height: type === 'Height30' ? 30 : type === 'Height20' ? 20 : 50 })
 }
 console.log(d.length, 'd')
 export default {
-  name: 'VirtualList-test',
+  name: 'unknowHeightVirtualList-test',
   data () {
     return {
       data: d
     }
   },
   components: {
-    VirtualList,
-    Height20,
-    Height30,
-    Height50
+    unknowHeightVirtualList
   },
   methods: {
     appendData () {
@@ -65,5 +93,8 @@ export default {
       box-sizing: border-box;
       border-bottom: 1px solid #999;
       box-sizing: border-box;
+    }
+    .unit {
+        word-break: break-all;
     }
     </style>

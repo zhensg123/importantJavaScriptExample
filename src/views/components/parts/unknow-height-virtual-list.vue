@@ -1,26 +1,29 @@
 <template>
-  <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
-    <div
-      class="render-list-phantom"
-      :style="{ height: listHeight + 'px' }"
-    ></div>
-    <div class="render-list" :style="{ transform: getTransform }">
-      <template v-for="item in visibleData">
-        <slot :value="item.data" :index="item.index"></slot>
-      </template>
+    <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
+      <div
+        class="render-list-phantom"
+        :style="{ height: listHeight + 'px' }"
+      ></div>
+      <div class="render-list" :style="{ transform: getTransform }">
+        <template v-for="item in visibleData">
+          <slot :value="item.data" :index="item.index"></slot>
+        </template>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
 
 <script>
 export default {
-  name: 'VirtualList',
+  name: 'unknow-height-virtual-list',
   props: {
     // 所有列表数据
     listData: {
       type: Array,
       default: () => []
     }
+  },
+  updated(){
+
   },
   computed: {
     // 列表总高度
@@ -102,22 +105,22 @@ export default {
 }
 </script>
 
-  <style scoped>
-.render-list-container {
-  overflow: auto;
-  position: relative;
-  -webkit-overflow-scrolling: touch;
-  height: 200px;
-}
+    <style scoped>
+  .render-list-container {
+    overflow: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    height: 200px;
+  }
 
-.render-list-phantom {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: -1;
-}
+  .render-list-phantom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
 
-.render-list {
-  text-align: center;
-}
-</style>
+  .render-list {
+    text-align: center;
+  }
+  </style>
