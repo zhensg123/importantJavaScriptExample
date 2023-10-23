@@ -95,6 +95,12 @@ export default [{
   title: 'virtual-scroll虚拟滚动',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/virtual-scroll.vue')
+}, {
+  path: '/component/noheight-virtual-list',
+  name: 'component',
+  title: '不定高虚拟列表',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/noheight-virtual-list.vue')
 }]
 
 // virtual-list
