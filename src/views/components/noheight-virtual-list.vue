@@ -66,6 +66,29 @@ export default {
     unknowHeightVirtualList
   },
   methods: {
+        // 获取列表项的当前尺寸
+    updateItemsSize () {
+      const nodes = this.$refs.items
+      nodes.forEach((node) => {
+        // 获取元素自身的属性
+        const rect = node.getBoundingClientRect()
+        const height = rect.height
+        const index = +node.id.replace(/^_(\d+).*/, '$1')
+        const oldHeight = this.positions[index].height
+        const dValue = oldHeight - height
+        // 存在差值
+        if (dValue) {
+          this.positions[index].bottom = this.positions[index].bottom - dValue
+          this.positions[index].height = height
+          this.positions[index].over = true // TODO
+
+          for (let k = index + 1; k < this.positions.length; k++) {
+            this.positions[k].top = this.positions[k - 1].bottom
+            this.positions[k].bottom = this.positions[k].bottom - dValue
+          }
+        }
+      })
+    },
     appendData () {
       const d = []
       for (let i = 0; i < 10; i++) {

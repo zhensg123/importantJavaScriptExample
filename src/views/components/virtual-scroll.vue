@@ -25,17 +25,17 @@ export default {
   },
   computed: {
     contentTransform () {
-      return `translate3d(0,${this.contentOffset}px,0)`
+      return `translateY(${this.contentOffset}px)`
     },
     handleTransform () {
-      return `translate3d(0,${this.handleOffset}px,0)`
+      return `translateY(${this.handleOffset}px)`
     },
     handleStyleHeight () {
       return `${this.handleHeight}px`
     }
   },
   methods: {
-    transformOffset (to = 'handle') {
+    transferOffset (to = 'handle') {
       const { $container, $slider } = this.$element
       const contentSpace = $container.scrollHeight - $container.offsetHeight
       const handleSpace = $slider.offsetHeight - this.handleHeight
@@ -57,7 +57,8 @@ export default {
 
       const bindContainerOffset = (event) => {
         event.preventDefault()
-        this.contentOffset += event.wheelDelta
+        console.log(event.wheelDeltaY, 'event.wheelDeltaY')
+        this.contentOffset += event.wheelDeltaY
         if (this.contentOffset < 0) {
           this.contentOffset = Math.max(this.contentOffset, -contentSpace)
         } else {
@@ -65,10 +66,15 @@ export default {
         }
       }
       const updateHandleOffset = () => {
-        this.handleOffset = this.transformOffset()
+        this.handleOffset = this.transferOffset()
       }
-      $container.addEventListener('mousewheel', bindContainerOffset)
-      $container.addEventListener('mousewheel', updateHandleOffset)
+      $container.addEventListener('wheel', bindContainerOffset)
+      $container.addEventListener('wheel', updateHandleOffset)
+
+      this.unbindContainerEvent = () => {
+        $container.removeEventListener('wheel', bindContainerOffset)
+        $container.removeEventListener('wheel', updateHandleOffset)
+      }
     },
     bindHandleEvent () {
       const { $slider, $handle } = this.$element
@@ -82,7 +88,7 @@ export default {
             startTop + deltaX < 0
               ? 0
               : Math.min(startTop + deltaX, handleSpace)
-          this.contentOffset = this.transformOffset('content')
+          this.contentOffset = this.transferOffset('content')
         }
 
         window.onmouseup = function () {
@@ -118,6 +124,9 @@ export default {
     this.$nextTick(() => {
       this.saveHtmlElementById()
     })
+  },
+  beforeDestroy () {
+    this.unbindContainerEvent()
   }
 }
 </script>
@@ -157,17 +166,4 @@ export default {
   }
 }
 
-// .doc-list[data-v-28dfa14f]::-webkit-scrollbar {
-//     width: 10px;
-// }
-
-// .doc-list[data-v-28dfa14f]::-webkit-scrollbar {
-//     width: 10px;
-// }
-
-// .doc-list[data-v-28dfa14f]::-webkit-scrollbar-thumb {
-//     -webkit-box-shadow: inset 0 0 5px #6b6b6b;
-//     background: #6b6b6b;
-//     border-radius: 10px;
-// }
 </style>
