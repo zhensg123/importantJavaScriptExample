@@ -4,44 +4,12 @@
     @scroll="scrollEvent($event)"
   >
     <div ref="phantom" class="infinite-list-phantom"></div>
-    <!-- 顶部刷新区域 -->
-    <div ref="top" v-if="topLoadMore" v-show="dargState !== 'none' && touchDistance >= 20" class="infinite-top-container">
-      <slot name="top" :dargState="dargState" :dargDistance="touchDistance">
-        <div class="infinite-top-content" :style="{color:topTextColor}">
-          <span class="infinite-top-content-icon icon-arrow" :class="dargState === 'drop' ? 'icon-reverse':''" v-if="dargState === 'pull' || dargState === 'drop'">
-            <svg t="1572934878285" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="4245" width="24" height="24">
-              <path d="M548.352 241.152L716.8 409.6a32.768 32.768 0 0 1 0 46.592 30.72 30.72 0 0 1-45.568 0l-116.736-115.2v464.896a32.768 32.768 0 1 1-65.024 0V340.992L372.736 460.8a39.424 39.424 0 0 1-45.568-6.656 32.768 32.768 0 0 1 0-46.592l162.816-166.4a35.328 35.328 0 0 1 58.368 0z" :fill="topTextColor" p-id="4246"></path>
-            </svg>
-          </span>
-          <span class="infinite-top-content-icon icon-revolve" v-if="dargState === 'loading'">
-            <svg class="icon" t="1572936012117" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="9195" width="32" height="32">
-              <path d="M527.36 225.28h-30.72c-8.192 0-15.36 7.168-15.36 15.36v133.12c0 8.192 7.168 15.36 15.36 15.36h30.72c8.192 0 15.36-7.168 15.36-15.36v-133.12c0-8.192-7.168-15.36-15.36-15.36z m256 256h-133.12c-8.192 0-15.36 7.168-15.36 15.36v30.72c0 8.192 7.168 15.36 15.36 15.36h133.12c8.192 0 15.36-7.168 15.36-15.36v-30.72c0-8.192-7.168-15.36-15.36-15.36z m-256 153.6h-30.72c-8.192 0-15.36 7.168-15.36 15.36v133.12c0 8.192 7.168 15.36 15.36 15.36h30.72c8.192 0 15.36-7.168 15.36-15.36v-133.12c0-8.192-7.168-15.36-15.36-15.36zM389.12 527.36v-30.72c0-8.192-7.168-15.36-15.36-15.36h-133.12c-8.192 0-15.36 7.168-15.36 15.36v30.72c0 8.192 7.168 15.36 15.36 15.36h133.12c8.192 0 15.36-7.168 15.36-15.36z m220.16-91.136c6.144 6.144 15.36 6.144 21.504 0l94.208-94.208c6.144-6.144 6.144-15.36 0-21.504l-21.504-21.504c-6.144-6.144-15.36-6.144-21.504 0l-94.208 94.208c-6.144 6.144-6.144 15.36 0 21.504l21.504 21.504z m22.528 151.552c-6.144-6.144-15.36-6.144-21.504 0l-21.504 21.504c-6.144 6.144-6.144 15.36 0 21.504l94.208 94.208c6.144 6.144 15.36 6.144 21.504 0l21.504-21.504c6.144-6.144 6.144-15.36 0-21.504l-94.208-94.208z m-217.088 0c-6.144-6.144-15.36-6.144-21.504 0l-94.208 94.208c-6.144 6.144-6.144 15.36 0 21.504l21.504 21.504c6.144 6.144 15.36 6.144 21.504 0l94.208-94.208c6.144-6.144 6.144-15.36 0-21.504l-21.504-21.504z m-72.704-289.792c-6.144-6.144-15.36-6.144-21.504 0l-21.504 21.504c-6.144 6.144-6.144 15.36 0 21.504l94.208 94.208c6.144 6.144 15.36 6.144 21.504 0l21.504-21.504c6.144-6.144 6.144-15.36 0-21.504l-94.208-94.208z" :fill="topTextColor" p-id="9196"></path>
-            </svg>
-          </span>
-          <span class="infinite-top-content-title">
-            <template v-if="dargState === 'pull'">
-              {{topPullText}}
-            </template>
-            <template v-if="dargState === 'drop'">
-               {{topDropText}}
-            </template>
-            <template v-if="dargState === 'loading'">
-              {{topLoadingText}}
-            </template>
-          </span>
-        </div>
-      </slot>
-    </div>
+
     <div ref="content" class="infinite-list">
-      <div ref="items" class="infinite-list-item-container" :id="row._key" :key="row._key" v-for="(row,row_index) in visibleData">
-        <template v-for="(item,col_index) in row.value">
-          <div class="infinite-item" :key="row._key + '-' + col_index">
-            <slot name="default" :item="item" :row="row_index" :col="col_index"></slot>
-          </div>
-        </template>
-        <!-- 空占位 -->
-        <template v-if="row.value.length < column">
-          <div v-for="(item,index) in (column - row.value.length%column)" class="infinite-item" :key="'empty-' + index">
+      <div ref="items" class="infinite-list-item-container" :id="row._key" :key="row._key" v-for="row in visibleData">
+        <template>
+          <div class="infinite-item">
+            <slot name="default" :item="row.value"></slot>
           </div>
         </template>
       </div>
@@ -159,15 +127,20 @@ export default {
   computed: {
     _listData () {
       return this.listData.reduce((init, cur, index) => {
-        if (index % this.column === 0) {
-          init.push({
-            // _转换后的索引_第一项在原列表中的索引_本行包含几列
-            _key: `_${index / this.column}_${index}_${this.column}`,
-            value: [cur]
-          })
-        } else {
-          init[init.length - 1].value.push(cur)
-        }
+        // if (index % this.column === 0) {
+        //   init.push({
+        //     // _转换后的索引_第一项在原列表中的索引_本行包含几列
+        //     _key: `_${index / this.column}_${index}_${this.column}`,
+        //     value: cur
+        //   })
+        // } else {
+        //   init[init.length - 1].value.push(cur)
+        // }
+        init.push({
+          // _转换后的索引_第一项在原列表中的索引_本行包含几列
+          _key: `_${index}`,
+          value: cur
+        })
         return init
       }, [])
     },
@@ -199,7 +172,6 @@ export default {
   },
   created () {
     this.initPositions()
-    this.setScrollState(false)
     // window.vm = this;
   },
   mounted () {
@@ -207,25 +179,8 @@ export default {
     this.start = 0
     this.end = this.start + this.visibleCount
     this.setStartOffset()
-
-    // 添加拖拽事件
-    if (this.topLoadMore) {
-      this.$refs.list.addEventListener('touchstart', this.touchStartEvent)
-      this.$refs.list.addEventListener('touchmove', this.touchMoveEvent)
-      this.$refs.list.addEventListener('touchend', this.touchEndEvent)
-    }
-  },
-  beforeDestroy () {
-    if (this.topLoadMore) {
-      this.$refs.list.removeEventListener('touchstart', this.touchStartEvent)
-      this.$refs.list.removeEventListener('touchmove', this.touchMoveEvent)
-      this.$refs.list.removeEventListener('touchend', this.touchEndEvent)
-    }
   },
   updated () {
-    if (this.dargState !== 'none') {
-      return
-    }
     // 列表数据长度不等于缓存长度
     if (this._listData.length !== this.positions.length) {
       this.initPositions()
@@ -244,18 +199,6 @@ export default {
     })
   },
   methods: {
-    // 设定滚动状态
-    setScrollState (flg = false) {
-      this.scrolling = flg
-    },
-    // 防抖处理，设置滚动状态
-    scrollEnd: _.debounce(function (event, data) {
-      this.setScrollState(false)
-      this.onScrollEnd && this.onScrollEnd(event, data)
-    }, 100),
-    scrollingEvent: function (event, data) {
-      this.onScroll && this.onScroll(event, data)
-    },
     // 初始化缓存
     initPositions () {
       this.positions = this._listData.map((d, index) => ({

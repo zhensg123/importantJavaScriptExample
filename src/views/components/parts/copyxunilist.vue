@@ -7,7 +7,6 @@
       ></div>
 
       <div
-        ref="content"
         :style="{ transform: contentTransform }"
         class="infinite-list"
       >
@@ -53,7 +52,11 @@ export default {
       start: 0,
       // 结束索引
       end: 0,
+
+      // 其实索引偏移量
       startOffset: 0,
+
+      // 缓存位置数组
       positions: []
     }
   },
@@ -83,10 +86,12 @@ export default {
       return Math.ceil(this.screenHeight / this.itemSize)
     },
     aboveCount () {
-      return 0
+    //   return Math.min(this.start, 0)
+    return 0
     },
     belowCount () {
-      return 0
+    //   return Math.min(this.listData.length - this.end, 0)
+    return 0
     },
     visibleData () {
       const start = this.start - this.aboveCount

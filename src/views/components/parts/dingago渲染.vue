@@ -1,16 +1,16 @@
 <template>
-  <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
-    <!-- 占位div -->
-    <div class="render-list-phantom" :style="{ height: listHeight + 'px' }"></div>
-    <div class="render-list" :style="{ transform: getTransform }">
-      <template
-        v-for="item in visibleData"
-      >
-        <slot :value="item.value" :type="item.type" :height="item.height + 'px'"  :index="item.id"></slot>
-      </template>
+    <div ref="list" class="render-list-container" @scroll="scrollEvent($event)">
+      <!-- 占位div -->
+      <div class="render-list-phantom" :style="{ height: listHeight + 'px' }"></div>
+      <div class="render-list" :style="{ transform: getTransform }">
+        <template
+          v-for="item in visibleData"
+        >
+          <slot :item="item" :height="itemSize + 'px'" ></slot>
+        </template>
+      </div>
     </div>
-  </div>
-</template>
+  </template>
 
 <script>
 export default {
@@ -24,7 +24,7 @@ export default {
     // 每项高度
     itemSize: {
       type: Number,
-      default: 50
+      default: 100
     }
   },
   computed: {
@@ -46,6 +46,7 @@ export default {
     }
   },
   mounted () {
+    // this.$el为组件根元素
     this.screenHeight = this.$el.clientHeight
     this.end = this.start + this.visibleCount
   },
@@ -76,23 +77,24 @@ export default {
 }
 </script>
 
-<style scoped>
-.render-list-container {
-  overflow: auto;
-  position: relative;
-  -webkit-overflow-scrolling: touch;
-  height: 200px;
-}
+  <style scoped>
+  .render-list-container {
+    overflow: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    height: 300px;
+    margin-left: 200px;
+  }
 
-.render-list-phantom {
-  position: absolute;
-  left: 0;
-  right: 0;
-  z-index: -1;
-}
+  .render-list-phantom {
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+  }
 
-.render-list {
-  text-align: center;
-}
+  .render-list {
+    text-align: center;
+  }
 
-</style>
+  </style>
