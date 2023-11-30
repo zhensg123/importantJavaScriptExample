@@ -101,6 +101,18 @@ export default [{
   title: '不定高虚拟列表',
   icon: '',
   component: () => import(/* webpackChunkName: "component" */ '@/views/components/noheight-virtual-list.vue')
+}, {
+  path: '/component/alert',
+  name: 'component',
+  title: 'alert',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/alert.vue')
+}, {
+  path: '/component/backtop',
+  name: 'component',
+  title: 'backtop',
+  icon: '',
+  component: () => import(/* webpackChunkName: "component" */ '@/views/components/backtop.vue')
 }]
 
 // virtual-list

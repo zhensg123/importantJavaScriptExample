@@ -1,6 +1,7 @@
 const path = require('path')
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const HardSourceWebpackPlugin = require('hard-source-webpack-plugin');
+const ElementUIUsagePlugin = require('./ElementUIUsagePlugin/index');
 
 const useAnalyzer = process.env.use_analyzer
 const {
@@ -28,7 +29,7 @@ const externals = {
   'js-cookie': 'Cookies'
 }
 const plugins = []
-plugins.push(new HardSourceWebpackPlugin())
+plugins.push(new HardSourceWebpackPlugin(), new ElementUIUsagePlugin({ regex: /<(el-[a-z-]+)/g }))
 
 module.exports = {
   lintOnSave: false,

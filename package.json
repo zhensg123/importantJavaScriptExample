@@ -19,6 +19,7 @@
     "element-ui": "^2.15.2",
     "moment": "^2.29.1",
     "node-sass": "^9.0.0",
+    "opn": "^6.0.0",
     "vue": "^2.6.11",
     "vue-codemirror": "^4.0.6",
     "vue-router": "^3.2.0",
